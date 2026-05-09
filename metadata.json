@@ -1,0 +1,6 @@
+{
+  "name": "Sistem Upload Bank Soal",
+  "description": "Sistem unggah file bank soal dengan validasi PDF dan DOCX yang terintegrasi dengan Google Apps Script.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
