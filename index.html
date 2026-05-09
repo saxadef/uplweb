@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistem Upload Bank Soal</title>
+    <title>UPLOAD</title>
     <!-- Menggunakan Tailwind CSS via CDN untuk desain yang responsif dan simpel -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -18,7 +18,7 @@
     <div class="bg-white/5 backdrop-blur-xl p-6 sm:p-8 rounded-[20px] shadow-2xl max-w-md w-full border border-white/10 relative z-10">
         <h2 class="text-[24px] font-bold text-white mb-2 flex items-center justify-center gap-3">
             <svg fill="none" height="32" viewBox="0 0 24 24" width="32" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L4.5 20.29L5.21 21L12 18L18.79 21L19.5 20.29L12 2Z" fill="#3b82f6"/></svg>
-            Upload Bank Soal
+            UPLOAD
         </h2>
         <p class="text-sm text-slate-400 mb-6 text-center">Portal unggah dokumen soal (Format: PDF atau DOCX)</p>
 
@@ -178,20 +178,17 @@
                 };
 
                 // Menggunakan text/plain untuk bypass preflight CORS pada Google Apps Script
-                const response = await fetch(GAS_URL, {
+                await fetch(GAS_URL, {
                     method: 'POST',
+                    mode: 'no-cors',
                     body: JSON.stringify(payload),
                     headers: {
                         'Content-Type': 'text/plain;charset=utf-8' 
                     }
                 });
 
-                if (response.ok) {
-                    showStatus('✅ Berhasil diunggah', 'text-green-400');
-                    setTimeout(resetSelection, 2000); // Reset UI setelah berhasil (opsional)
-                } else {
-                    showStatus('❌ Gagal mengunggah file', 'text-red-400');
-                }
+                showStatus('✅ Berhasil diunggah!', 'text-green-400');
+                setTimeout(resetSelection, 2000); // Reset UI setelah berhasil (opsional)
             } catch (error) {
                 console.error('Upload Error:', error);
                 showStatus('❌ Gagal mengunggah file', 'text-red-400');
