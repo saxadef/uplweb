@@ -15,20 +15,36 @@
 </head>
 <body class="bg-slate-900 flex items-center justify-center min-h-screen p-4 font-sans text-slate-50 relative overflow-hidden" style="background-image: radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%), radial-gradient(at 0% 100%, hsla(225,39%,30%,1) 0, transparent 50%);">
 
-    <div class="bg-white/5 backdrop-blur-xl p-6 sm:p-8 rounded-[20px] shadow-2xl max-w-md w-full border border-white/10 relative z-10">
-        <h2 class="text-[24px] font-bold text-white mb-2 flex items-center justify-center gap-3">
-            <svg fill="none" height="32" viewBox="0 0 24 24" width="32" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L4.5 20.29L5.21 21L12 18L18.79 21L19.5 20.29L12 2Z" fill="#3b82f6"/></svg>
-            UPLOAD
-        </h2>
-        <p class="text-sm text-slate-400 mb-6 text-center">Portal unggah dokumen soal (Format: PDF atau DOCX)</p>
+    <div class="bg-white/5 backdrop-blur-xl p-6 sm:p-8 rounded-[20px] shadow-2xl max-w-md w-full border border-white/10 relative z-10 transition-all duration-300">
+        
+        <!-- Tombol Admin -->
+        <button id="btnAdmin" class="absolute top-5 right-5 text-slate-500 hover:text-white transition-colors z-20" title="Admin Panel">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+        </button>
 
-        <!-- Area Upload -->
-        <div class="mb-6">
+        <!-- MAIN PUBLIC VIEW -->
+        <div id="mainView" class="w-full flex-col flex">
+            <h2 class="text-[24px] font-bold text-white mb-2 flex items-center justify-center gap-3">
+                <svg fill="none" height="32" viewBox="0 0 24 24" width="32" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L4.5 20.29L5.21 21L12 18L18.79 21L19.5 20.29L12 2Z" fill="#3b82f6"/></svg>
+                UPLOAD
+            </h2>
+            <p class="text-sm text-slate-400 mb-6 text-center">Portal unggah dokumen soal (Format: PDF, DOCX, PPT, PPTX, PNG, JPG/JPEG)</p>
+
+            <!-- Navigation Tabs -->
+        <div class="flex gap-2 mb-6 p-1 bg-black/20 rounded-[14px]">
+            <button id="tabBtnUpload" class="flex-1 py-2 text-sm font-semibold rounded-[10px] bg-blue-500 text-white transition-all shadow-md">Upload</button>
+            <button id="tabBtnDownload" class="flex-1 py-2 text-sm font-semibold rounded-[10px] text-slate-400 hover:text-white hover:bg-white/5 transition-all">Daftar File</button>
+        </div>
+
+        <!-- SECTION: UPLOAD -->
+        <div id="sectionUpload">
+            <!-- Area Upload -->
+            <div class="mb-6">
             <div class="file-drop-area relative rounded-[16px] p-8 text-center cursor-pointer bg-transparent border-2 border-dashed border-white/20 hover:border-blue-500 hover:bg-blue-500/5 transition-colors duration-300 flex flex-col items-center justify-center min-h-[240px]" id="dropArea">
                 <input 
                     type="file" 
                     id="fileInput" 
-                    accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document" 
+                    accept=".pdf,.docx,.ppt,.pptx,.png,.jpg,.jpeg,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation,image/png,image/jpeg" 
                     class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                 >
                 <div class="pointer-events-none">
@@ -36,7 +52,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
                     </svg>
                     <p class="text-sm font-medium text-slate-300">Klik atau seret file ke sini</p>
-                    <p class="text-xs text-white/60 mt-2 opacity-60">PDF atau DOCX</p>
+                    <p class="text-xs text-white/60 mt-2 opacity-60">PDF, DOCX, PPT(X), PNG, JPG</p>
                 </div>
             </div>
 
@@ -63,9 +79,246 @@
         <div id="status" class="mt-4 text-center text-sm font-medium h-6 flex justify-center items-center">
             <!-- Indikator status akan muncul di sini -->
         </div>
+        </div> <!-- End Section Upload -->
+
+        <!-- SECTION: DOWNLOAD -->
+        <div id="sectionDownload" class="hidden flex-col h-[340px]">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-white text-sm font-semibold">Daftar Dokumen</h3>
+                <button id="btnRefresh" class="text-blue-400 hover:text-blue-300 text-xs px-3 py-1 bg-blue-500/10 rounded-lg transition-colors">Refresh</button>
+            </div>
+            <div id="fileListContainer" class="flex-1 overflow-y-auto space-y-3 pr-2 scrollbar-thin">
+                <div class="text-center text-slate-400 py-8 text-sm">Menunggu data...</div>
+            </div>
+        </div> <!-- End Section Download -->
+        </div> <!-- End Main View -->
+
+        <!-- ADMIN LOGIN VIEW -->
+        <div id="adminLoginView" class="hidden w-full flex-col fade-in">
+            <h2 class="text-xl font-bold text-white mb-6 text-center flex items-center justify-center gap-2">
+                <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                Admin Login
+            </h2>
+            <div id="loginStatus" class="mb-4 text-center text-sm font-medium h-4"></div>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs text-slate-400 mb-1">Username</label>
+                    <input type="text" id="inputUsername" class="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-blue-500 transition-colors" placeholder="Masukkan username">
+                </div>
+                <div>
+                    <label class="block text-xs text-slate-400 mb-1">Password</label>
+                    <input type="password" id="inputPassword" class="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-blue-500 transition-colors" placeholder="Masukkan password">
+                </div>
+                <button id="btnSubmitLogin" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 rounded-xl transition duration-200 mt-2">Login</button>
+                <button id="btnBackToMain" class="w-full text-slate-400 hover:text-white text-sm py-2 transition-colors">Kembali ke Portal</button>
+            </div>
+        </div>
+
+        <!-- ADMIN DASHBOARD VIEW -->
+        <div id="adminDashboardView" class="hidden w-full flex-col fade-in">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                    <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path></svg>
+                    Dashboard Admin
+                </h2>
+                <button id="btnLogout" class="text-xs px-3 py-1.5 bg-red-500/10 text-red-400 hover:bg-red-500 hover:text-white rounded-lg transition-colors font-medium">Logout</button>
+            </div>
+            
+            <div class="space-y-4">
+                <!-- Toggle Akses Daftar File -->
+                <div class="bg-black/20 border border-white/10 rounded-xl p-4 flex justify-between items-center">
+                    <div>
+                        <h4 class="text-sm text-white font-medium">Kunci Daftar File</h4>
+                        <p class="text-xs text-slate-400 mt-1">Pengunjung butuh PIN</p>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="toggleRequirePin" class="sr-only peer">
+                        <div class="w-11 h-6 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-500"></div>
+                    </label>
+                </div>
+
+                <!-- Setup PIN -->
+                <div class="bg-black/20 border border-white/10 rounded-xl p-4">
+                    <h4 class="text-sm text-white font-medium mb-3">Pengaturan PIN Publik</h4>
+                    <div class="flex gap-2">
+                        <input type="text" id="inputPublicPin" class="w-full bg-black/40 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500" placeholder="Cth: 123456" maxlength="6">
+                        <button id="btnSavePin" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors shrink-0">Simpan</button>
+                    </div>
+                </div>
+
+                <!-- Update Kredensial -->
+                <div class="bg-black/20 border border-white/10 rounded-xl p-4">
+                    <h4 class="text-sm text-white font-medium mb-3">Ubah Kredensial Admin</h4>
+                    <div class="space-y-2">
+                        <input type="text" id="inputNewUsername" class="w-full bg-black/40 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500" placeholder="Username Baru">
+                        <input type="password" id="inputNewPassword" class="w-full bg-black/40 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500" placeholder="Password Baru">
+                        <button id="btnSavePassword" class="w-full bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">Perbarui Info</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="adminStatusMsg" class="mt-4 text-center text-sm font-medium h-4"></div>
+        </div>
     </div>
 
     <script>
+        // DOM Elements - View Nav
+        const mainView = document.getElementById('mainView');
+        const adminLoginView = document.getElementById('adminLoginView');
+        const adminDashboardView = document.getElementById('adminDashboardView');
+        
+        const btnAdmin = document.getElementById('btnAdmin');
+        const btnBackToMain = document.getElementById('btnBackToMain');
+        const btnLogout = document.getElementById('btnLogout');
+        const btnSubmitLogin = document.getElementById('btnSubmitLogin');
+        
+        function switchAppView(view) {
+            mainView.classList.add('hidden');
+            adminLoginView.classList.add('hidden');
+            adminDashboardView.classList.add('hidden');
+            
+            if(view === 'main') mainView.classList.remove('hidden');
+            if(view === 'login') adminLoginView.classList.remove('hidden');
+            if(view === 'dashboard') adminDashboardView.classList.remove('hidden');
+        }
+
+        btnAdmin.addEventListener('click', () => switchAppView('login'));
+        btnBackToMain.addEventListener('click', () => switchAppView('main'));
+        
+        // --- Auth & Admin Scripts --- //
+        let adminAuthData = { username: '', password: '', requirePin: false, publicPin: '' };
+
+        btnSubmitLogin.addEventListener('click', async () => {
+            const user = document.getElementById('inputUsername').value;
+            const pass = document.getElementById('inputPassword').value;
+            const stat = document.getElementById('loginStatus');
+            
+            if(!user || !pass) {
+                stat.innerHTML = '<span class="text-red-400">Isi username dan password!</span>';
+                return;
+            }
+
+            stat.innerHTML = '<span class="text-blue-400 flex items-center justify-center"><svg class="animate-spin h-4 w-4 mr-2" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Memeriksa...</span>';
+            
+            try {
+                // Request GET untuk login sesuai routing GAS
+                const loginUrl = `${GAS_URL}?action=login&user=${encodeURIComponent(user)}&pass=${encodeURIComponent(pass)}`;
+                const res = await fetch(loginUrl);
+                const data = await res.json();
+                
+                if(data.status === 'success') {
+                    adminAuthData = { 
+                        username: user, 
+                        password: pass,
+                        requirePin: (data.requirePin === true || data.requirePin === "TRUE" || data.requirePin === "true"),
+                        publicPin: data.publicPin
+                    };
+                    stat.innerHTML = '<span class="text-green-400">Login Berhasil!</span>';
+                    
+                    document.getElementById('toggleRequirePin').checked = adminAuthData.requirePin;
+                    document.getElementById('inputPublicPin').value = adminAuthData.publicPin || '';
+                    
+                    setTimeout(() => {
+                        switchAppView('dashboard');
+                        stat.innerHTML = '';
+                        document.getElementById('inputPassword').value = '';
+                    }, 600);
+                } else {
+                    stat.innerHTML = '<span class="text-red-400 text-xs">' + (data.message || 'Kredensial salah!') + '</span>';
+                }
+            } catch (err) {
+                 stat.innerHTML = '<span class="text-red-400">Gagal terhubung! (Periksa URL App Script)</span>';
+            }
+        });
+
+        btnLogout.addEventListener('click', () => {
+             adminAuthData = { username: '', password: '', requirePin: false, publicPin: '' };
+             switchAppView('main');
+        });
+        
+        // Admin Actions
+        document.getElementById('btnSavePin').addEventListener('click', async () => {
+            const btn = document.getElementById('btnSavePin');
+            const toggle = document.getElementById('toggleRequirePin').checked;
+            const pin = document.getElementById('inputPublicPin').value;
+            const stat = document.getElementById('adminStatusMsg');
+            
+            btn.innerHTML = 'Menyimpan...';
+            try {
+                const res = await fetch(GAS_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({ 
+                        action: 'updateSettings', 
+                        adminUser: adminAuthData.username, 
+                        adminPass: adminAuthData.password,
+                        requirePin: toggle,
+                        publicPin: pin
+                    })
+                });
+                const data = await res.json();
+                if(data.status === 'success') {
+                    adminAuthData.requirePin = toggle;
+                    adminAuthData.publicPin = pin;
+                    stat.innerHTML = '<span class="text-green-400">Pengaturan PIN tersimpan!</span>';
+                } else {
+                    stat.innerHTML = '<span class="text-red-400">Gagal: ' + (data.message || '') + '</span>';
+                }
+            } catch(e) { stat.innerHTML = '<span class="text-red-400">Gagal menghubungi server</span>'; }
+            btn.innerHTML = 'Simpan';
+            setTimeout(() => stat.innerHTML = '', 3000);
+        });
+
+        document.getElementById('btnSavePassword').addEventListener('click', async () => {
+            const btn = document.getElementById('btnSavePassword');
+            const newUser = document.getElementById('inputNewUsername').value;
+            const newPass = document.getElementById('inputNewPassword').value;
+            const stat = document.getElementById('adminStatusMsg');
+            
+            if(!newUser || !newPass) {
+                 stat.innerHTML = '<span class="text-red-400">Username & password baru harus diisi!</span>';
+                 setTimeout(() => stat.innerHTML = '', 3000);
+                 return;
+            }
+            
+            btn.innerHTML = 'Memperbarui...';
+            try {
+                const res = await fetch(GAS_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({ 
+                        action: 'updateSettings', 
+                        adminUser: newUser, 
+                        adminPass: newPass,
+                        requirePin: adminAuthData.requirePin,
+                        publicPin: adminAuthData.publicPin
+                    })
+                });
+                const data = await res.json();
+                if(data.status === 'success') {
+                    stat.innerHTML = '<span class="text-green-400">Diperbarui! Silakan login ulang.</span>';
+                    setTimeout(() => {
+                        adminAuthData = { username: '', password: '', requirePin: false, publicPin: '' };
+                        document.getElementById('inputNewUsername').value = '';
+                        document.getElementById('inputNewPassword').value = '';
+                        switchAppView('login');
+                        stat.innerHTML = '';
+                    }, 2000);
+                } else {
+                    stat.innerHTML = '<span class="text-red-400">Gagal: ' + (data.message || '') + '</span>';
+                }
+            } catch(e) { stat.innerHTML = '<span class="text-red-400">Gagal menghubungi server</span>'; }
+            btn.innerHTML = 'Perbarui Info';
+            setTimeout(() => stat.innerHTML = '', 3000);
+        });
+
+        // DOM Elements - Tabs
+        const tabBtnUpload = document.getElementById('tabBtnUpload');
+        const tabBtnDownload = document.getElementById('tabBtnDownload');
+        const sectionUpload = document.getElementById('sectionUpload');
+        const sectionDownload = document.getElementById('sectionDownload');
+        const btnRefresh = document.getElementById('btnRefresh');
+        const fileListContainer = document.getElementById('fileListContainer');
+
+        // DOM Elements - Upload
         const fileInput = document.getElementById('fileInput');
         const dropArea = document.getElementById('dropArea');
         const fileNameDisplay = document.getElementById('fileName');
@@ -75,8 +328,126 @@
         const uploadText = document.getElementById('uploadText');
         const statusDiv = document.getElementById('status');
         
-        const GAS_URL = 'https://script.google.com/macros/s/AKfycbzfrg5ML3EmauPu8UUcNwyCrpPGviDtTdoErZ2awG-GzLC50S13WHZOqwLOP3ht-6cq/exec';
+        // Obfuscated URL Parameter Generator
+        const _p1 = 'https://script.google.com/macros';
+        const _p2 = '/s/';
+        // ID obfuscated to prevent easy scraping
+        const _idEnc = 'QUtmeWNieDhSbTEzRXpkdlRKUEpqTVg4eTBOdDZyNTd5bEJ6QkgzN2RZZmhEa0JwTDdWdlIzMDZGV2lheGtOa2dsMTVOazUy';
+        const _id = atob(_idEnc); 
+        const _p3 = '/exec';
+        const getGasUrl = () => `${_p1}${_p2}${_id}${_p3}`;
+        
+        const GAS_URL = getGasUrl();
+        
         let selectedFile = null;
+        let isFetchingFiles = false;
+
+        // --- Tab Logic ---
+        function switchTab(tab) {
+            if (tab === 'upload') {
+                sectionUpload.classList.remove('hidden');
+                sectionDownload.classList.add('hidden');
+                sectionDownload.classList.remove('flex');
+                
+                tabBtnUpload.className = "flex-1 py-2 text-sm font-semibold rounded-[10px] bg-blue-500 text-white transition-all shadow-md";
+                tabBtnDownload.className = "flex-1 py-2 text-sm font-semibold rounded-[10px] text-slate-400 hover:text-white hover:bg-white/5 transition-all";
+            } else {
+                sectionUpload.classList.add('hidden');
+                sectionDownload.classList.remove('hidden');
+                sectionDownload.classList.add('flex');
+                
+                tabBtnUpload.className = "flex-1 py-2 text-sm font-semibold rounded-[10px] text-slate-400 hover:text-white hover:bg-white/5 transition-all";
+                tabBtnDownload.className = "flex-1 py-2 text-sm font-semibold rounded-[10px] bg-blue-500 text-white transition-all shadow-md";
+                
+                if (fileListContainer.innerHTML.includes('Menunggu data...')) {
+                    fetchFileList();
+                }
+            }
+        }
+        
+        tabBtnUpload.addEventListener('click', () => switchTab('upload'));
+        tabBtnDownload.addEventListener('click', () => switchTab('download'));
+        btnRefresh.addEventListener('click', () => fetchFileList());
+
+        let currentPin = '';
+
+        async function fetchFileList(useCachePin = false) {
+            if (isFetchingFiles) return;
+            isFetchingFiles = true;
+            fileListContainer.innerHTML = `
+                <div class="flex flex-col justify-center items-center py-8">
+                    <svg class="animate-spin h-6 w-6 text-blue-500 mb-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    <span class="text-sm text-slate-400">Memeriksa akses...</span>
+                </div>
+            `;
+            
+            try {
+                // Fetch dengan mengirimkan PIN (jika ada)
+                const listUrl = GAS_URL + "?action=list_files" + (currentPin ? "&pin=" + encodeURIComponent(currentPin) : "");
+                const res = await fetch(listUrl);
+                const json = await res.json();
+                
+                // Jika butuh PIN, kembalikan response unauthorized
+                if(json.status === 'unauthorized') {
+                    fileListContainer.innerHTML = `
+                        <div class="p-5 mt-2 bg-black/20 rounded-xl border border-white/10 text-center fade-in">
+                            <svg class="w-8 h-8 text-yellow-500 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                            <h3 class="text-white font-medium mb-3">Daftar File Terkunci</h3>
+                            <input type="password" id="inputViewPin" placeholder="Masukkan PIN Akses" class="mb-2 w-full max-w-[200px] mx-auto bg-black/40 border border-white/10 rounded-lg px-3 py-2 text-sm text-center text-white focus:outline-none focus:border-blue-500 transition-colors">
+                            <button id="btnSubmitPin" class="w-full max-w-[200px] bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">Buka Kunci</button>
+                            <div id="pinError" class="text-red-400 text-xs mt-3 block">${useCachePin ? 'PIN yang anda masukkan salah' : ''}</div>
+                        </div>
+                    `;
+                    document.getElementById('btnSubmitPin').addEventListener('click', () => {
+                        const inputPin = document.getElementById('inputViewPin').value;
+                        if(inputPin) {
+                            currentPin = inputPin;
+                            isFetchingFiles = false;
+                            fetchFileList(true);
+                        }
+                    });
+                    document.getElementById('inputViewPin').addEventListener('keypress', (e) => {
+                        if (e.key === 'Enter') document.getElementById('btnSubmitPin').click();
+                    });
+                    
+                    isFetchingFiles = false;
+                    return;
+                }
+                
+                if(json.status === 'error') {
+                     currentPin = ''; // Reset invalid pin
+                     throw new Error(json.message || 'Gagal memuat');
+                }
+
+                let files = [];
+                if (Array.isArray(json)) files = json;
+                else if (json.data) files = json.data;
+                else if (json.files) files = json.files;
+
+                if (!files || files.length === 0) {
+                    fileListContainer.innerHTML = '<div class="text-center text-slate-400 py-8 text-sm">Folder masih kosong</div>';
+                } else {
+                    fileListContainer.innerHTML = files.map(f => `
+                        <div class="bg-black/20 border border-white/10 rounded-xl p-3 flex justify-between items-center transition hover:bg-white/5 fade-in">
+                            <div class="truncate text-sm text-slate-200 flex-1 mr-3">${f.name || 'Dokumen'}</div>
+                            <a href="${f.url}" target="_blank" class="bg-blue-500/20 text-blue-400 hover:bg-blue-500 hover:text-white px-3 py-1.5 rounded-lg text-xs font-medium transition-colors shrink-0">
+                                Buka
+                            </a>
+                        </div>
+                    `).join('');
+                }
+            } catch (err) {
+                fileListContainer.innerHTML = `<div class="text-center text-red-400 py-8 text-sm">${err.message}<br><button onclick="currentPin=''; window.fetchFileList();" class="mt-2 text-blue-400 hover:underline">Coba Lagi</button></div>`;
+            } finally {
+                isFetchingFiles = false;
+            }
+        }
+        
+        // Buat global agar bisa dipanggil dari inline onclick error handler
+        window.fetchFileList = fetchFileList;
 
         // --- Drag and Drop Logic ---
         ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
@@ -110,14 +481,14 @@
         
         function isAllowedExtension(fileName) {
             const ext = fileName.split('.').pop().toLowerCase();
-            return ['pdf', 'docx'].includes(ext);
+            return ['pdf', 'docx', 'ppt', 'pptx', 'png', 'jpg', 'jpeg'].includes(ext);
         }
 
         function handleFileSelect() {
             const file = fileInput.files[0];
             if (file) {
                 if (!isAllowedExtension(file.name)) {
-                    showStatus('❌ Hanya file .pdf dan .docx yang diperbolehkan.', 'text-red-400');
+                    showStatus('❌ Format tidak didukung. Gunakan PDF, DOCX, PPT(X), PNG, atau JPG.', 'text-red-400');
                     resetSelection();
                     return;
                 }
@@ -172,20 +543,23 @@
                 const base64Data = await convertToBase64(selectedFile);
                 
                 const payload = {
+                    action: 'upload',
                     name: selectedFile.name,
                     mimeType: selectedFile.type || 'application/octet-stream',
                     base64: base64Data
                 };
 
-                // Menggunakan text/plain untuk bypass preflight CORS pada Google Apps Script
-                await fetch(GAS_URL, {
+                // Untuk response JSON dari POST, kita hilangkan no-cors agar FETCH bisa meresolve response JSON dari GAS
+                const res = await fetch(GAS_URL, {
                     method: 'POST',
-                    mode: 'no-cors',
                     body: JSON.stringify(payload),
-                    headers: {
-                        'Content-Type': 'text/plain;charset=utf-8' 
-                    }
+                    // tidak pakai Content-Type khusus yang memicu preflight, biarkan default fetch ke text/plain
                 });
+                
+                const data = await res.json();
+                if(data.status === 'error') {
+                    throw new Error(data.message);
+                }
 
                 showStatus('✅ Berhasil diunggah!', 'text-green-400');
                 setTimeout(resetSelection, 2000); // Reset UI setelah berhasil (opsional)
